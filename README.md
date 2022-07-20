@@ -13,6 +13,21 @@ Définition d'un header global dans Axios pour inclure le token d'auth dans tout
 Besoin d'un back pour renvoyer un jeton d'auth lorsque la connexion est correcte
 Besoin de la librairie `js-cookie`
 
-## Installation des dépendances nécessaires au projet 
+## Installation des dépendances nécessaires au projet
 
 `npm install axios js-cookie`
+
+# on crée les pages le header et le formulaire
+
+# process.browser
+
+va nous permettre de savoir si nous sommes coté client ou serveur
+
+# Configuration axios
+
+on crée le dossier auth et le fichier axios.js dans lequel on rentre la configuration axios requise pour le projet
+
+## on crée le fichier cookies.js qui va gérer les cookies
+
+# Installation de la librairie jwt-decode qui va nous permettre de décoder notre token
+`npm install jwt-decode`
