@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styles from "../styles/login.module.css";
+import useAuth from "../auth/context";
 const Login = () => {
+  const { login, isAuthenticated } = useAuth();
+  console.log(isAuthenticated);
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -10,7 +13,7 @@ const Login = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(values.username, values.password);
+    login(values.username, values.password);
   };
   return (
     <div className={styles.main}>

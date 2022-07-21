@@ -30,4 +30,17 @@ on crée le dossier auth et le fichier axios.js dans lequel on rentre la configu
 ## on crée le fichier cookies.js qui va gérer les cookies
 
 # Installation de la librairie jwt-decode qui va nous permettre de décoder notre token
+
 `npm install jwt-decode`
+
+## Mise en place du fichier context.js
+
+On crée le context avec createContext et on l'appelle AuthContext,
+
+voir la vidéo 57 d'explication du context
+
+## Login
+
+On se log avec les identifiants username : johndoe et password: secret , ces identifiants ont t prédéfini par le concepteur de la formation
+
+# Changement du header en fonction du loggin
