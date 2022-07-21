@@ -39,8 +39,14 @@ On crée le context avec createContext et on l'appelle AuthContext,
 
 voir la vidéo 57 d'explication du context
 
+On peu également utiliser Redux pour faire cela !!
+
 ## Login
 
 On se log avec les identifiants username : johndoe et password: secret , ces identifiants ont t prédéfini par le concepteur de la formation
 
 # Changement du header en fonction du loggin
+
+!! ne pa exporter useAuth par default pour éviter une erreur !!
+
+on importe useAuth dans le composant header on destructure pour extraire user et isAuthenticated qui nous permettrons de faire un rendu conditionnel d'élément
