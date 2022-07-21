@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import api from "./axios";
 import Router from "next/router";
 import { setCookie, removeCookie, getCookieFromBrowser } from "./cookies";
@@ -8,6 +8,20 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Persistance de l'utilisateur
+  useEffect(() => {
+    async function loadUserFromCookies() {
+      const token = getCookieFromBrowser("token");
+      if (token) {
+        api.defaults.headers.Authorization = `Bearer ${token}`;
+        const userData = jwt(token); // on décode le token
+        const { data: user } = await api.get(`/api/user/${userData._id}`); //on va récupérer l'user grace à l'userData._id décodé du token
+        if (user) setUser(user);
+      }
+      setLoading(false);
+    }
+    loadUserFromCookies();
+  }, []);
   const login = async (username, password) => {
     //on va récupérer le token a 'l'url défini dans la config de axios (baseURL) a laquelle on ajoute /api/login
     const { data: token } = await api.post("/api/login", {
