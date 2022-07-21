@@ -7,7 +7,6 @@ import styles from "../styles/header.module.css";
 
 const Header = () => {
   const { isAuthenticated, user, logout } = useAuth();
-  console.log(isAuthenticated, user);
   const router = useRouter();
   return (
     <div className={styles.main}>
@@ -27,20 +26,22 @@ const Header = () => {
       </Link>
       {isAuthenticated && (
         <>
-          <Link href="/dashboard" passHref>
-            <span
-              className={
-                router.pathname === "/dashboard" ? styles.active : styles.link
-              }
-            >
-              Dashboard
-            </span>
-          </Link>
           <span className={styles.link}>Bonjour {user.username}</span>
           <button className={styles.link} onClick={logout}>
             Déconnexion
           </button>
         </>
+      )}
+      {isAuthenticated && user.role === "admin" && (
+        <Link href="/dashboard" passHref>
+          <span
+            className={
+              router.pathname === "/dashboard" ? styles.active : styles.link
+            }
+          >
+            Dashboard
+          </span>
+        </Link>
       )}
       {!isAuthenticated && (
         <Link href="/login" passHref>
