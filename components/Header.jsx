@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/header.module.css";
 
 const Header = () => {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   console.log(isAuthenticated, user);
   const router = useRouter();
   return (
@@ -36,7 +36,10 @@ const Header = () => {
               Dashboard
             </span>
           </Link>
-          <span>Bonjour {user.username}</span>
+          <span className={styles.link}>Bonjour {user.username}</span>
+          <button className={styles.link} onClick={logout}>
+            Déconnexion
+          </button>
         </>
       )}
       {!isAuthenticated && (

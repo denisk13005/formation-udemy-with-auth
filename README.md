@@ -54,3 +54,7 @@ on importe useAuth dans le composant header on destructure pour extraire user et
 # Persistance de l'user
 
 On utilise un useEffect dans context.js pour aller checker si le token est présent dans les cookies grace à la fonction getCookieFromBrowser(), si il est présent on met le state à jour et le loader sur false . !! Ne pas oublier d'appeler le fonction dans le useEffect !!
+
+# Déconnexion
+
+Ajout d'un boutton déconnexion qui appélera logout pour supprimer le token des cookies
