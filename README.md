@@ -58,3 +58,15 @@ On utilise un useEffect dans context.js pour aller checker si le token est prés
 # Déconnexion
 
 Ajout d'un boutton déconnexion qui appélera logout pour supprimer le token des cookies
+
+# Gestion des rôles
+
+Affichage de la page dashboard pour l'admin (role est une propriété de user 'admin' ou 'user')
+
+# Gestion de l'expiration du token
+
+Pour gérer l'expiration du token on va créer un try catch dans le useEffect de context.js afin de capturer l'erreur 401 qui correspondra à l'expiration de notre token, on supprimera alors le token des cookies et on invitera l'utilisateur à se reconnecter
+
+# Routes Privées
+
+On crée le fichier auth/protectedRoutes.js, et on utilise un HOC (composant d'ordre supérieur pour gérer l'accès à la page profile)

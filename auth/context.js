@@ -11,12 +11,20 @@ export const AuthProvider = ({ children }) => {
   // Persistance de l'utilisateur
   useEffect(() => {
     async function loadUserFromCookies() {
-      const token = getCookieFromBrowser("token");
+      const token = getCookieFromBrowser("token"); // récupèrera notre token nommé token dans nos cookies si il y est
       if (token) {
-        api.defaults.headers.Authorization = `Bearer ${token}`;
-        const userData = jwt(token); // on décode le token
-        const { data: user } = await api.get(`/api/user/${userData._id}`); //on va récupérer l'user grace à l'userData._id décodé du token
-        if (user) setUser(user);
+        try {
+          api.defaults.headers.Authorization = `Bearer ${token}`;
+          const userData = jwt(token); // on décode le token
+          const { data: user } = await api.get(`/api/user/${userData._id}`); //on va récupérer l'user grace à l'userData._id décodé du token
+          if (user) setUser(user);
+        } catch (e) {
+          if (e.response.status === 401) {
+            removeCookie("token");
+            setUser(null);
+            window.alert("session expirée, veuillez vous reconnecter");
+          }
+        }
       }
       setLoading(false);
     }
@@ -46,7 +54,7 @@ export const AuthProvider = ({ children }) => {
   };
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, login, logout }}
+      value={{ isAuthenticated: !!user, user, login, logout, loading }}
     >
       {children}
     </AuthContext.Provider>
