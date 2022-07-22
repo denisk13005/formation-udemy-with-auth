@@ -69,4 +69,13 @@ Pour gérer l'expiration du token on va créer un try catch dans le useEffect de
 
 # Routes Privées
 
-On crée le fichier auth/protectedRoutes.js, et on utilise un HOC (composant d'ordre supérieur pour gérer l'accès à la page profile)
+On crée le fichier auth/protectedRoutes.js, et on utilise un HOC (composant d'ordre supérieur pour gérer l'accès à la page profile pour l'user)
+On crée adminRoutes.js, on redirige vers home lors du click sur dashboard si l'utilisateur n'a pas le rôle admin
+
+# Redirection page login si déjà log
+
+Côté client avec un useEffect qui nous redirige vers'/' si isAuthenticated = true ! On voit quand même apparaître la page login un court instant
+
+Côté serveur avec getServerSideProps :
+
+- on cre la fonction redirectFromServer dans cookies.js, on l'importe dans login.js et on l'appelle dans getServerSideProps pour dclencher la redirection c^té client si on est déjà log

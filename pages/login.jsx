@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/login.module.css";
 import { useAuth } from "../auth/context";
+import { useRouter } from "next/router";
+import { redirectFromServer } from "./../auth/cookies";
 const Login = () => {
   const { login, isAuthenticated } = useAuth();
-  console.log(isAuthenticated);
+  const router = useRouter();
   const [values, setValues] = useState({
     username: "",
     password: "",
   });
+
+  //Exemple de redirection côté client
+  // useEffect(() => {
+  //   isAuthenticated && router.push("/");
+  // }, [isAuthenticated]);
   const handleChange = (name) => (e) => {
     setValues({ ...values, [name]: e.target.value });
   };
@@ -45,6 +52,14 @@ const Login = () => {
       </form>
     </div>
   );
+};
+
+// On se sert de getServerSideProps pour faire une redirection côté serveur si déjà log
+export const getServerSideProps = async (context) => {
+  redirectFromServer(context);
+  return {
+    props: {},
+  };
 };
 
 export default Login;

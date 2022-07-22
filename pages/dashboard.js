@@ -1,8 +1,8 @@
 import React from "react";
+import AdminRoutes from "../auth/adminRoutes";
 
 const Dashboard = () => {
   return <div>Dashboard</div>;
 };
 
-export default Dashboard;
-Dashboard;
+export default AdminRoutes(Dashboard);
